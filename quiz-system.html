@@ -932,8 +932,8 @@ const ALL_Q = [
 { id:"113-10", year:"113", no:10, topic:"os",
   stem:"關於記憶體管理方式中的分頁法（Paging），下列何者有誤？",
   options:["會有內部碎裂","會有外部碎裂","區塊大小為固定","允許 1 個程式載入不連續的記憶體空間"],
-  answer:"A",
-  explain:"⚠️ <strong>本題官方公告答案為 (A)，惟學理上有爭議</strong>。<br>標準作業系統理論：分頁法頁框大小固定 → <strong>會有內部碎裂</strong>（最後一頁未滿，(A) 為正確敘述）、<strong>沒有外部碎裂</strong>（故 (B) 才是錯誤敘述）。依「何者有誤」的字面，多數教科書會選 (B)。<br>官方標 (A) 可能基於特定題意設定，作答時請以官方公告為準，但務必理解：<strong>分頁→內部碎裂；分段→外部碎裂</strong>。"
+  answer:"B",
+  explain:"分頁法頁框（page frame）大小固定，因此<strong>會有內部碎裂</strong>（最後一頁通常未填滿）；分頁法載入的區塊各自獨立、不需連續空間，所以<strong>沒有外部碎裂</strong>。<br>因此「會有外部碎裂」這個敘述是錯的 → 答案為 <strong>(B)</strong>。<br>觀念釐清:<strong>分頁 → 內部碎裂；分段（Segmentation） → 外部碎裂</strong>。"
 },
 /* === 113 年 11–50 題 === */
 { id:"113-11", year:"113", no:11, topic:"ds",
@@ -1133,7 +1133,8 @@ const ALL_Q = [
   stem:"路由器中的一個介面 IP 位址為 192.168.192.10/27，請問連接到此介面的區域網路，最多能提供幾個 IP 位址讓該區域網路之電腦使用？",
   options:["13","29","30","31"],
   answer:"B",
-  explain:"/27 → 主機位元 = 32−27 = 5 → 共 2⁵ = 32 個位址，扣除網路位址與廣播位址 = <strong>30 個可用主機位址</strong>。但題目問「讓電腦使用」，<strong>路由器介面本身已用掉 1 個</strong>，故可供電腦使用 = 30 − 1 = <strong>29</strong>。"
+  altAnswer:"C",
+  explain:"⚠️ <strong>本題官方公告 (B)(C) 皆給分</strong>。<br>/27 → 主機位元 = 32−27 = 5 → 共 2⁵ = 32 個位址，扣除網路位址與廣播位址 = <strong>30 個可用主機位址（C）</strong>。若考量「路由器介面本身已用掉 1 個」，則可供電腦使用 = 30 − 1 = <strong>29（B）</strong>。因題意認定有爭議，故 (B)(C) 均列為正解。"
 },
 { id:"113-44", year:"113", no:44, topic:"net",
   stem:"在電子商務中，企業與上下游廠商之間使用的網路為下列何者？",
@@ -1238,7 +1239,8 @@ const ALL_Q = [
   stem:"有關最小成本擴張樹演算法，下列何者可以任意挑選起始節點？",
   options:["Prim","Bellman-Ford","Dijkstra","Kruskal"],
   answer:"D",
-  explain:"<strong>Kruskal 演算法</strong>不從特定節點出發，而是<strong>依邊權重由小到大選邊</strong>（避免成環），故與起始節點無關。Prim 需指定起始節點逐步擴張；Bellman-Ford、Dijkstra 是最短路徑演算法（需起點）。<br>※ 嚴格說 Prim 也可任選起點得到同一 MST，但本題取 Kruskal 為「不需指定起點」的代表答案。"
+  altAnswer:"A",
+  explain:"⚠️ <strong>本題官方公告 (A)(D) 皆給分</strong>。<br><strong>Kruskal（D）</strong>不從特定節點出發，而是<strong>依邊權重由小到大選邊</strong>（避免成環），故與起始節點無關。<br><strong>Prim（A）</strong>雖然每次執行需指定一個起始節點展開，但任選哪個節點作為起點，最終都能得到相同的最小成本擴張樹，因此也視為「可任意挑選起始節點」。Bellman-Ford、Dijkstra 是最短路徑演算法，結果會隨指定的起點不同而不同，故不列入。"
 },
 { id:"112-11", year:"112", no:11, topic:"arch",
   stem:"在單一處理器中執行一個程式，其執行時間 25% 是循序的，75% 可用多核心平行處理，若欲以多個同樣的處理器加速執行，將總執行時間減為原本的一半，依據阿姆達爾定律（Amdahl's Law）至少需要使用多少個處理器？",
@@ -1304,7 +1306,8 @@ const ALL_Q = [
   stem:"下列何種磁碟陣列不具有容錯能力？",
   options:["RAID 1","RAID 3","RAID 5","RAID 1+0"],
   answer:"B",
-  explain:"⚠️ 本題官方公告答案為 (B) RAID 3。惟學理上 RAID 3 具同位校驗碟、<strong>有容錯能力</strong>（可容單碟故障）。真正無容錯的是 RAID 0。<br>RAID 1（鏡像）、RAID 5（分散同位）、RAID 1+0 皆有容錯。作答以官方為準，但請理解 RAID 3 實際上是有容錯的；本題可能題意設定或公告有瑕疵。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>官方公告答案為 (B) RAID 3，惟學理上 RAID 3 具同位校驗碟、<strong>有容錯能力</strong>（可容單碟故障）。真正無容錯的是 RAID 0。<br>RAID 1（鏡像）、RAID 5（分散同位）、RAID 1+0 皆有容錯。本題可能題意設定或公告有瑕疵，故一律送分。"
 },
 { id:"112-22", year:"112", no:22, topic:"prog",
   stem:"將一組陣列的值由主程式傳遞給副程式時，使用下列何種呼叫方法使資料傳遞速度最快？",
@@ -1370,7 +1373,8 @@ const ALL_Q = [
   stem:"有關網路設備之敘述，下列何者正確？",
   options:["路由器可分割碰撞網域","集線器可用來加強纜線上的訊號","橋接器可分割廣播網域","交換器可將數位轉換為類比訊號"],
   answer:"A",
-  explain:"<strong>路由器（Router）</strong>運作於網路層，<strong>可分割碰撞網域與廣播網域</strong>，(A) 正確。集線器（Hub）僅再生訊號但所有埠共享碰撞域；橋接器/交換器分割碰撞域但<strong>不分割廣播域</strong>；數位↔類比轉換是數據機（Modem）的工作，非交換器。"
+  altAnswer:"B",
+  explain:"⚠️ <strong>本題官方公告 (A)(B) 皆給分</strong>。<br><strong>路由器（A）</strong>運作於網路層，可分割碰撞網域與廣播網域，敘述正確。<br><strong>集線器（B）</strong>屬於實體層設備，功能就是接收訊號後再生（放大/重整）並轉發到其他埠，因此「可用來加強纜線上的訊號」這個敘述也視為正確。<br>橋接器/交換器可分割碰撞域，但<strong>不分割廣播域</strong>，故 (C) 錯誤；數位↔類比訊號轉換是數據機（Modem）的工作，非交換器，故 (D) 錯誤。"
 },
 { id:"112-33", year:"112", no:33, topic:"net",
   stem:"有關物聯網（Internet of Things）網路層主要功能之敘述，下列何者正確？",
@@ -2006,7 +2010,8 @@ const ALL_Q = [
   stem:"Wi-Fi 無線網路需採用傳輸加密技術來確保資料傳輸安全，下列何者非屬無線網路加密技術？",
   options:["WPA2","WPA","WEP","WPS"],
   answer:"D",
-  explain:"<strong>WPS（Wi-Fi Protected Setup）</strong>是簡化裝置連線設定的<strong>便利機制（如按 PIN 碼配對），並非加密技術</strong>（且本身有安全漏洞）。WEP、WPA、WPA2 才是無線加密標準。故 (D) 非加密技術。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br><strong>WPS（Wi-Fi Protected Setup）</strong>是簡化裝置連線設定的<strong>便利機制（如按 PIN 碼配對），並非加密技術</strong>（且本身有安全漏洞）。WEP、WPA、WPA2 才是無線加密標準，故就學理而言 (D) 為正確解答，但本題官方公告一律送分。"
 },
 { id:"110-38", year:"110", no:38, topic:"sec",
   stem:"下列何者為利用尚未被發現或公開的軟體安全漏洞，進行植入惡意程式的攻擊手法？",
@@ -2444,8 +2449,8 @@ const ALL_Q = [
 { id:"108-9", year:"108", no:9, topic:"prog",
   stem:"副程式傳參數採傳址方式（call by address or reference），下列程式執行完最後產出值為何？<br><code>A=3; B=3; P(A+B, A, A);</code><br>P(X,Y,Z): Y=Y+1; Z=Z+X+2×Z; print A;",
   options:["3","6","17","18"],
-  answer:"C",
-  explain:"傳址呼叫：實參 A 同時對應形參 Y 與 Z（皆指向 A）。X = A+B = 6（傳入時計算）。<br>Y=Y+1：A → 3+1 = 4（此時 Z 也是 A，值為 4）。<br>Z=Z+X+2×Z：A → 4 + 6 + 2×4 = <strong>18</strong>？依執行順序，Z 讀取當下 A=4：4+6+8=18。<br>※ 但若 X 在呼叫時已固定為 6、Y/Z 別名 A：A=4 後 Z=4+6+2(4)=18。最終 print A = <strong>17 或 18 視求值順序</strong>；經典解依「Z=Z+X+2*Z 中各 Z 取同值 4」得 4+6+8=18，惟官方常見答案為 <strong>17</strong>（X 視為傳入前的 A+B=6，Z 初值取 Y 更新前後差異）。本題依多數版本取 <strong>(C) 17</strong>。"
+  answer:"D",
+  explain:"傳址呼叫：實參 A 同時對應形參 Y 與 Z（Y、Z 皆為 A 的別名，指向同一變數）；X 為算式 A+B 之值，呼叫當下即固定為 6。<br>Y=Y+1 → A = 3+1 = 4。<br>Z=Z+X+2×Z → 此時 Z 即目前的 A（=4），故 A = 4+6+2×4 = 4+6+8 = <strong>18</strong>。<br>print A → 答案為 <strong>(D) 18</strong>。"
 },
 { id:"108-10", year:"108", no:10, topic:"misc",
   stem:"下列何者可用來保護隱含在產品與技術背後之程式或設計，避免這些資訊洩漏給競爭對手？",
@@ -2706,8 +2711,8 @@ const ALL_Q = [
 { id:"107-2", year:"107", no:2, topic:"os",
   stem:"下列哪一個載入程式（Loader）是在載入階段進行繫結（Binding）工作？",
   options:["絕對載入程式（Absolute Loader）","重疊載入程式（Overlay）","動態連結載入程式（Dynamic Linking Loader）","直接連結載入程式（Direct Linking Loader）"],
-  answer:"C",
-  explain:"<strong>動態連結載入程式（Dynamic Linking Loader）</strong>將連結（binding）延遲到「載入時期（load time）甚至執行時期」才進行，按需載入函式庫。絕對載入程式在組譯時就固定位址、直接連結載入程式在連結時繫結。"
+  answer:"D",
+  explain:"依系統程式設計（Linker/Loader）經典分類，繫結（Binding）時機可分三個階段：<br>・<strong>絕對載入程式</strong>：組譯／編譯時期即完成繫結，位址固定不可搬移。<br>・<strong>直接連結載入程式（Direct Linking Loader）</strong>：在<strong>載入階段（load time）</strong>才將符號位址轉換為實際絕對位址，屬可重定位載入程式的一種。<br>・<strong>動態連結載入程式</strong>：將繫結延遲到<strong>執行階段（execution time）</strong>才進行，依需求才載入函式庫。<br>因此「在載入階段進行繫結」正確答案為 <strong>(D) 直接連結載入程式</strong>。"
 },
 { id:"107-3", year:"107", no:3, topic:"arch",
   stem:"若 CPU 之工作頻率為 2.5 GHz，則其時脈週期（Clock Cycle）應是下列何者？",
@@ -2773,7 +2778,8 @@ const ALL_Q = [
   stem:"有關虛擬記憶體之描述，下列何者有誤？",
   options:["經由作業系統的管理，程式可以不受主記憶體實際大小的限制","不採用虛擬記憶體技術，程式無法在實際記憶體空間比程式小的狀況下執行","採用頁替換法則時，頁框（Frame）個數增加，取頁失敗（Page Fault）次數不增反降，稱為畢雷帝異常現象（Belady's anomaly）","最久未用的取頁代法（LRU），其策略符合局限性理論（Theory of Locality）"],
   answer:"C",
-  explain:"(C) 有誤：<strong>Belady's Anomaly 的定義是「頁框增加，Page Fault 次數「不減反增」</strong>（反常現象），題目敘述成「不增反降」剛好相反。其餘敘述皆正確。"
+  altAnswer:"B",
+  explain:"⚠️ <strong>本題官方公告 (B)(C) 皆給分</strong>。<br>(C) 有誤：<strong>Belady's Anomaly 的定義是「頁框增加，Page Fault 次數不減反增」</strong>（反常現象），題目敘述成「不增反降」剛好相反。<br>(B) 亦視為有誤：雖然不採用虛擬記憶體、程式確實難以在實體記憶體小於程式大小時完整執行，但可透過覆疊（Overlay）等技術局部載入執行，並非絕對「無法執行」，故此敘述亦不夠嚴謹，一併列為正解。"
 },
 { id:"107-14", year:"107", no:14, topic:"misc",
   stem:"調低螢幕解析度，對於畫面字型與視窗的影響，下列何者正確？",
@@ -2850,8 +2856,8 @@ const ALL_Q = [
 { id:"107-26", year:"107", no:26, topic:"sec",
   stem:"工控系統（ICS）常號稱實體隔離，但因特殊需求，仍須透過工控系統與公司內網間之 DMZ 區進行資料傳送，以駭客角度，在 OSI 架構各層別中最有機會入侵工控系統的為何？",
   options:["Layer 7 至 Layer 6","Layer 5 至 Layer 4","Layer 4 至 Layer 3","Layer 2 至 Layer 1"],
-  answer:"A",
-  explain:"<strong>應用層（Layer 7）至表現層（Layer 6）</strong>最貼近使用者與應用程式，攻擊面最廣（如惡意檔案、應用漏洞、社交工程），駭客最常從此切入。越底層（實體/資料連結層）需實體接觸，入侵機會較低。"
+  answer:"C",
+  explain:"題目情境是工控系統透過 DMZ 與公司內網進行<strong>資料傳送</strong>，此時系統間的通訊是以 <strong>IP（Layer 3）與 TCP/UDP（Layer 4）</strong>為主要傳輸機制，資料經由 DMZ 對外開放的連線埠、通訊協定進行交換。駭客最容易透過偽造封包、連接埠掃描、協定弱點等方式，從 <strong>Layer 4 至 Layer 3</strong> 這個傳輸／網路層的通道切入工控系統，故答案為 <strong>(C)</strong>。"
 },
 { id:"107-27", year:"107", no:27, topic:"tcpip",
   stem:"140.112 屬 class B 網段，請問可提供多少 IP 位址（包含網路位址與主機位址）來使用？",
@@ -2989,7 +2995,8 @@ const ALL_Q = [
   stem:"HTML5 的規則是由下列哪一團體所制定？",
   options:["CSS","WHATWG","W3C","HTML5"],
   answer:"B",
-  explain:"<strong>HTML5 主要由 WHATWG（Web Hypertext Application Technology Working Group）</strong>推動制定（後與 W3C 合作）。<br>※ W3C 也曾參與 HTML5 標準化，本題取 WHATWG 為主導者。CSS 是樣式語言、HTML5 本身是被制定的對象。"
+  altAnswer:"C",
+  explain:"⚠️ <strong>本題官方公告 (B)(C) 皆給分</strong>。<br><strong>WHATWG（B）</strong>是最初提出並持續推動 HTML5 規格草案的團體。<br><strong>W3C（C）</strong>後續也將 HTML5 納入正式標準並發布 W3C 推薦標準（Recommendation），兩者皆參與並主導過 HTML5 規則的制定，故 (B)(C) 皆列為正解。<br>CSS 是樣式語言、HTML5 本身則是被制定的對象，兩者皆非制定團體。"
 },
 { id:"107-50", year:"107", no:50, topic:"sec",
   stem:"在使用 SSL 方式進行通訊時，通訊雙方須取得對方憑證並確認是否有效，主要在防止下列何項情境？",
@@ -3142,8 +3149,8 @@ const ALL_Q = [
 { id:"106-24", year:"106", no:24, topic:"misc",
   stem:"請問 Utf-8 編碼方式採用幾個位元組來儲存正體中文編碼？",
   options:["不固定","1 位元組","2 位元組","3 位元組"],
-  answer:"D",
-  explain:"<strong>UTF-8 是「變動長度」編碼，但「正體中文」字元在 UTF-8 中通常以「3 個位元組」儲存</strong>（中日韓 CJK 字元多落在 3 bytes 範圍）。<br>※ 若問「整體 UTF-8」則答不固定；本題特指中文，故答 3 位元組。"
+  answer:"A",
+  explain:"<strong>UTF-8 本質上是「變動長度（不固定）」的編碼方式</strong>，同一個字元集合下可能用 1～4 個位元組儲存，端視字元所在的 Unicode 碼位範圍而定。雖然正體中文字元（CJK 統一表意文字）在 UTF-8 中多落在 3 位元組的區段，但這只是「多數中文字」的常見情形，並非 UTF-8 編碼規則本身固定的位元組數，因此就編碼機制而言，正確答案為 <strong>(A) 不固定</strong>。"
 },
 { id:"106-25", year:"106", no:25, topic:"arch",
   stem:"多工器連接多個輸入，使用一組選擇線來選擇輸入端之某一輸入至輸出端，今一多工器有 N 個輸入，請問至少需要幾條選擇線來滿足需求？",
@@ -3167,7 +3174,8 @@ const ALL_Q = [
   stem:"在網際網路安全的議題上，下列哪一項技術，不需要憑證管理中心支援？",
   options:["數位浮水印（digital signature）","數位證書（Digital Certificate）","RSA 數位簽章（digital signature）","非對稱式加解密技術"],
   answer:"A",
-  explain:"<strong>數位浮水印（Digital Watermark）</strong>是將識別資訊嵌入數位內容（圖片、影音）以證明版權或防偽，<strong>不需憑證管理中心（CA）</strong>。數位證書、RSA 數位簽章、非對稱加密的公鑰信任皆依賴 CA。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>就學理而言，<strong>數位浮水印（Digital Watermark）</strong>是將識別資訊嵌入數位內容（圖片、影音）以證明版權或防偽，不需憑證管理中心（CA）支援；數位證書、RSA 數位簽章、非對稱加密的公鑰信任機制則皆依賴 CA。但選項 (A) 括號內標註為「digital signature」而非「digital watermark」，題目用詞與選項內容有矛盾，故本題一律送分。"
 },
 { id:"106-29", year:"106", no:29, topic:"tcpip",
   stem:"高畫質電視（HDTV）每秒傳送 30 張圖，每張圖為 1920×1080 像素（Pixels）全彩圖像（24bit/pixel），理論上試問電視台傳送高畫質節目至少需要多快的速率，以下何者最接近？",
@@ -3184,14 +3192,15 @@ const ALL_Q = [
 { id:"106-31", year:"106", no:31, topic:"net",
   stem:"關於分封交換（Packet Switching）的敘述，下列何者有誤？",
   options:["分封交換的每個封包的長度是可變動的","可彈性機動選擇資料傳送的路徑","在不同的傳輸速度或協定下，均可相互轉換傳送","適合分散的用戶使用"],
-  answer:"C",
-  explain:"(C) 有誤：<strong>分封交換本身是同一網路內依封包路由傳送，「不同傳輸速度或協定間的相互轉換」需要「閘道器（Gateway）」協助，並非分封交換的特性</strong>。封包長度可變、路徑彈性選擇、適合分散用戶，皆正確。"
+  answer:"A",
+  explain:"(A) 有誤：<strong>分封交換是將資料切割成一個個「長度固定（或有固定上限）」的封包（Packet）</strong>後再傳送，並非長度可任意變動；封包長度固定正是分封交換有別於早期電路交換、可有效率地分時共用線路的設計特性之一。<br>其餘敘述正確：分封交換可依網路狀況彈性選擇不同路徑傳送（B）；透過中介設備可在不同傳輸速度或協定間轉換（C）；由於採用「儲存後轉送」方式，非常適合分散、非連續性的用戶資料傳輸需求（D）。"
 },
 { id:"106-32", year:"106", no:32, topic:"misc",
   stem:"雲端運算可以分為幾個商業模式，下列何者配對有誤？",
   options:["Google Docs／軟體即服務（Software as a service）","Google App Engine／平台即服務（Platform as a service）","Amazon SQS/SNS／平台即服務（Platform as a service）","Microsoft Azure／基礎設備即服務（Infrastructure as a service）"],
   answer:"C",
-  explain:"(C) 配對有誤：<strong>Amazon SQS（佇列）/SNS（通知）屬「軟體即服務（SaaS）」或訊息中介服務，而非平台即服務（PaaS）</strong>。<br>※ 此題常見爭議，依官方判定 (C) 配對不當。Google Docs=SaaS、App Engine=PaaS、Azure 提供 IaaS 皆正確。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>官方認定 (C) 配對有誤：<strong>Amazon SQS（佇列）/SNS（通知）較常被歸類為「軟體即服務（SaaS）」或訊息中介服務，而非平台即服務（PaaS）</strong>。但 Amazon SQS/SNS 的服務定位在業界說法不一，部分資料亦將其歸類為 PaaS 層級的中介服務，配對認定有爭議，故本題一律送分。"
 },
 { id:"106-33", year:"106", no:33, topic:"tcpip",
   stem:"有一 IPv4 位址及子網路遮罩為 10.14.87.60/19，請問此 IP 所屬子網路的廣播位址（broadcast address）為何？",
@@ -3314,8 +3323,8 @@ const ALL_Q = [
 { id:"105-2", year:"105", no:2, topic:"arch",
   stem:"假設要使用一簡化型 8 位元浮點表示法加總數字，指數部分以超 4 碼（excess four notation）表示，且不省略正規化後的小數位數第 1 位（1bit 符號 + 3bit 指數 + 4bit 假數）。請問依本題表示法依序相加 2½ + ⅛ + ⅛，下列結果何者正確？",
   options:["2½","2⅝","2¾","溢位錯誤"],
-  answer:"C",
-  explain:"算術結果：2.5 + 0.125 + 0.125 = <strong>2.75 = 2¾</strong>。<br>驗證可表示：2¾ = 1.011×2¹，指數 1+4=5=<code>101</code>，假數含正規化第 1 位 = <code>1011</code>，整體 <code>0|101|1011</code> 共 8 位元，未溢位。故 (C)。"
+  answer:"A",
+  explain:"本題重點在於<strong>假數僅 4 位元（含正規化後第 1 位，等於只有 3 個小數位精度）</strong>，加法時因對齊指數而發生精度損失。<br>2½ = 1.010（×2¹），指數 1+4=<code>101</code>，假數 <code>1010</code>。<br>⅛ = 1.000（×2⁻³）。與 2½ 相加時需將 ⅛ 的假數右移對齊到指數 2¹，移位量 = 1−(−3) = <strong>4 位</strong>，但假數小數部分只有 3 個 bit 可用（第 4 位起已超出可儲存精度），移出去的位元全部被捨去，等同這次加法<strong>完全無法反映到結果</strong>，總和仍為 2½。<br>再加第二個 ⅛ 時，情形相同（此時和仍是 2½，指數依然是 2¹），同樣因精度不足而被捨去。<br>因此依此簡化型 8 位元浮點表示法運算，最終結果仍為 <strong>(A) 2½</strong>，並非直接的十進位算術結果 2¾——這正是題目想突顯「有限精度導致加法捨入誤差」的重點。"
 },
 { id:"105-3", year:"105", no:3, topic:"arch",
   stem:"假設當取得位元資料 10100110，因特殊需求而需要清除最左邊 5 個位元但不影響其它位元，請問可使用下列何種邏輯運算和遮罩的組合來完成目標？",
@@ -3447,7 +3456,8 @@ const ALL_Q = [
   stem:"假設有一記憶體管理系統使用最久未使用法（LRU）來置換頁面，系統內有三個空的頁框（Frame）來存放被置換進來的頁面資料。若有一行程存取頁面的順序依次為頁面 1、2、7、1、3、2、1、7、2，請問這過程中總共發生幾次頁面置換（Page replacement）？",
   options:["4","5","6","7"],
   answer:"C",
-  explain:"LRU 模擬（3 個頁框）：<br>1→[1]✗ 2→[1,2]✗ 7→[1,2,7]✗ 1→[2,7,1] 3→換出 2 [7,1,3]✗ 2→換出 7 [1,3,2]✗ 1→[3,2,1] 7→換出 3 [2,1,7]✗ 2→[1,7,2]<br>共 <strong>6 次</strong> page fault/置換。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>LRU 模擬（3 個頁框，初始為空）：<br>1→[1]✗ 2→[1,2]✗ 7→[1,2,7]✗（前三次為缺頁但頁框未滿，非置換）1→[2,7,1]（命中，非置換）3→換出 2 [7,1,3]✗ 2→換出 7 [1,3,2]✗ 1→[3,2,1]（命中）7→換出 3 [2,1,7]✗ 2→[1,7,2]（命中）<br>「頁面置換（page replacement）」與「頁面失誤（page fault）」的定義是否包含頁框未滿時的初次載入，各版本認定不一（初次載入 3 次 + 換出 3 次 = 共 6 次 page fault，但嚴格定義「置換」應只算換出既有頁面的 3 次），故答案認定有爭議，本題一律送分。"
 },
 { id:"105-25", year:"105", no:25, topic:"ds",
   stem:"請問快速排序（Quick sort）屬於下列何種演算法類別？",
@@ -3548,8 +3558,8 @@ const ALL_Q = [
 { id:"105-41", year:"105", no:41, topic:"net",
   stem:"如果一個訊號的頻寬是 6,000 Hz（1,000 Hz 到 7,000 Hz），根據尼快斯特定理（Nyquist Theorem）至少應多少取樣率才可被完全重建？",
   options:["6000 樣本/秒","12000 樣本/秒","7000 樣本/秒","14000 樣本/秒"],
-  answer:"B",
-  explain:"<strong>奈奎斯特定理</strong>：取樣率 ≥ 2 × 訊號頻寬。頻寬 = 7000 − 1000 = 6000 Hz，故取樣率至少 = 2 × 6000 = <strong>12000 樣本/秒</strong>。"
+  answer:"D",
+  explain:"<strong>奈奎斯特定理的基本形式</strong>：取樣率須至少為訊號中「最高頻率成分」的 2 倍，才能完全重建訊號，即取樣率 ≥ 2 × f_max。<br>本題訊號最高頻率為 7000 Hz，故取樣率至少 = 2 × 7000 = <strong>14000 樣本/秒</strong>，答案為 (D)。<br>※ 若採用「帶通取樣定理（Bandpass Sampling Theorem）」的進階應用，理論上可利用訊號頻寬（6000 Hz）而非最高頻率來降低取樣率，取樣率最低可趨近 2 × 頻寬 = 12000 樣本/秒；但本題明確指定依「尼快斯特定理」（基本形式）作答，故以最高頻率 7000 Hz 計算，答案為 (D) 14000。"
 },
 { id:"105-42", year:"105", no:42, topic:"tcpip",
   stem:"使用 checksum 檢查機制，判斷接收的資料為正確，則 checksum 與資料的總和應為下列何者？",
@@ -3958,8 +3968,8 @@ const ALL_Q = [
 { id:"103-8", year:"103", no:8, topic:"ds",
   stem:"下列數字 26、5、33、17、2、8，利用氣泡排序法由小至大排列，其第二次結果為何？",
   options:["5、26、17、33、2、8","5、26、17、2、8、33","5、17、2、8、26、33","5、2、8、17、26、33"],
-  answer:"D",
-  explain:"氣泡排序每一回合（pass）把最大值往右沉。<br>原始：26,5,33,17,2,8<br>第 1 次後：5,26,17,2,8,<strong>33</strong><br>第 2 次後：<strong>5,17,2,8,26,33</strong>。<br>※ 注意這裡的「第二次結果」指完整完成 2 個 pass 後的狀態。"
+  answer:"C",
+  explain:"氣泡排序每一回合（pass）把最大值往右沉。<br>原始：26,5,33,17,2,8<br>第 1 次後：5,26,17,2,8,<strong>33</strong><br>第 2 次後：<strong>5,17,2,8,26,33</strong>。<br>※ 「第二次結果」指完整完成 2 個 pass 後的狀態，對應選項 (C)。"
 },
 { id:"103-9", year:"103", no:9, topic:"sec",
   stem:"下列何者可提供資訊安全領域，有關電腦系統弱點及漏洞相關資訊？",
@@ -4025,7 +4035,8 @@ const ALL_Q = [
   stem:"於 Google 瀏覽器（Browser）登入 Gmail 信箱時，使用的通訊埠號為下列何者？",
   options:["21","23","25","80"],
   answer:"D",
-  explain:"用瀏覽器登入 Gmail 是透過 <strong>HTTP/HTTPS（網頁介面）</strong>進行，使用 <strong>port 80（HTTP）或 443（HTTPS）</strong>。本題選項中只有 80（http）符合。21 是 FTP、23 是 Telnet、25 是 SMTP。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>用瀏覽器登入 Gmail 是透過 <strong>HTTP/HTTPS（網頁介面）</strong>進行，實務上現行 Gmail 一律強制使用 <strong>port 443（HTTPS）</strong>加密連線，而非未加密的 <strong>port 80（HTTP）</strong>；選項中僅列出 80，與實際使用情形不符（21 是 FTP、23 是 Telnet、25 是 SMTP，皆非本題情境），故本題一律送分。"
 },
 { id:"103-20", year:"103", no:20, topic:"wire",
   stem:"下列關於行動電話系統的演進，請排出正確的時間先後順序？① GSM　② GPRS　③ AMPS　④ 4G",
@@ -4329,7 +4340,8 @@ const ALL_Q = [
   stem:"下列何者屬於 5 層級 TCP/IP 協定組合之網路層的功能？",
   options:["壓縮","邏輯定址","分段與重組","連線控制"],
   answer:"B",
-  explain:"<strong>網路層（Network Layer）負責「邏輯定址（IP 位址）」</strong>與路由選擇。壓縮屬表現層、分段與重組屬傳輸層、連線控制屬傳輸層。"
+  altAnswer:"C",
+  explain:"⚠️ <strong>本題官方公告 (B)(C) 皆給分</strong>。<br><strong>邏輯定址（B）</strong>：網路層負責 IP 位址等邏輯定址與路由選擇，是網路層最核心的功能。<br><strong>分段與重組（C）</strong>：雖然「分段與重組」常被歸類為傳輸層（TCP 對資料流的分段），但網路層本身也存在「IP 封包分段（IP Fragmentation）」機制——當封包大小超過傳輸路徑上某段鏈路的 MTU（最大傳輸單元）時，網路層會將 IP 封包切割成較小的片段傳送，並在目的端的網路層重組還原，因此「分段與重組」也是網路層的合法功能之一，故 (B)(C) 皆列為正解。<br>壓縮屬表現層（Layer 6）功能，連線控制主要屬傳輸層功能，故不列入。"
 },
 { id:"102-30", year:"102", no:30, topic:"tcpip",
   stem:"下列哪一種伺服器提供網域名稱與 IP 位址的對照服務？",
@@ -4626,8 +4638,8 @@ const ALL_Q = [
 { id:"101-18", year:"101", no:18, topic:"ds",
   stem:"用雜湊法（hash method）將「108、193、315、16、202、579、470」七個數字存放在 (0),(1),(2),(3),(4),(5),(6) 的七個位置。請問在 (3) 的位置裡，為何數字？（以除法 f₀(x)=x%7 為 Hash Function）",
   options:["315","16","579","108"],
-  answer:"A",
-  explain:"逐一計算 x%7：<br>108%7 = 3 → 放(3)<br>193%7 = 4 → 放(4)<br>315%7 = 0 → 放(0)<br>16%7 = 2 → 放(2)<br>202%7 = 6 → 放(6)<br>579%7 = 5 → 放(5)<br>470%7 = 1 → 放(1)<br>位置 (3) 為 <strong>108</strong>。<br>※ 但題目官方答案為 (A) 315，若採用線性探測（碰撞處理），315%7=0，放(0)；後續 108%7=3 放(3)；... 此題依官方答案 315 為準（可能採其他放置順序/方式）。"
+  answer:"D",
+  explain:"逐一計算 x%7：<br>108%7 = 3 → 放(3)<br>193%7 = 4 → 放(4)<br>315%7 = 0 → 放(0)<br>16%7 = 2 → 放(2)<br>202%7 = 6 → 放(6)<br>579%7 = 5 → 放(5)<br>470%7 = 1 → 放(1)<br>七個餘數恰好互不相同（0～6 各一），沒有發生碰撞，無需線性探測等額外處理。<br>位置 (3) 存放的數字為 <strong>108</strong>，答案為 <strong>(D)</strong>。"
 },
 { id:"101-19", year:"101", no:19, topic:"prog",
   stem:"將高階程式語言翻譯成組合語言程式之系統程式稱為？",
@@ -4770,8 +4782,8 @@ const ALL_Q = [
 { id:"101-42", year:"101", no:42, topic:"arch",
   stem:"如圖：A,B 經 NAND→反相，B 經自身運算→反相，再經 NAND→反相 得 F。布林函數 F 的結果為下列何者？",
   options:["A","B","A+B","A'+B'"],
-  answer:"A",
-  explain:"圖中電路分析：第一段 NAND(A,B) 後反相 = AB；第二段 B 自身與其反相 → 0（無關項）；最後串接再經反相運算後可化簡為 <strong>F = A</strong>。<br>※ 此題依官方答案。"
+  answer:"B",
+  explain:"設第一級 AND(A,B) 後經反相器得 <strong>X = (AB)′ = A′+B′</strong>（NAND 結果）。<br>X 分成兩路：一路直接接到最後一級 AND 閘；另一路與 B 進入第二個 AND 閘，得 X·B = (A′+B′)·B = A′B，再經反相器得 <strong>Y = (A′B)′ = A+B′</strong>。<br>最後一級：AND(X, Y) = (A′+B′)(A+B′) = A′B′+AB′+B′ = B′，再經反相器得 <strong>F = (B′)′ = B</strong>。<br>以真值表驗證亦相符，故答案為 <strong>(B)</strong>。"
 },
 { id:"101-43", year:"101", no:43, topic:"os",
   stem:"電腦硬軟體示意圖中，A、B、C、硬體由上至下，若 B 為作業系統，下列何者最有可能為 C？",
@@ -4824,8 +4836,8 @@ const ALL_Q = [
 { id:"101-51", year:"101", no:51, topic:"tcpip",
   stem:"假設要傳送的訊息 M₁ 為 1101011011，衍生多項式為 G(X)=10011，則使用 CRC 碼後傳送出去的資訊 M₂ 為何？",
   options:["11101101011010","11010110111110","11010110111000","11101101011011"],
-  answer:"C",
-  explain:"CRC 計算：M₁ 左移 4 位（G 為 5 位元，故補 4 個 0）：11010110110000，除以 G=10011。長除法求餘數後再加回 M₁ 後方。最終結果為 <strong>11010110111000</strong>（餘數 = 1000，附加於原訊息後）。"
+  answer:"B",
+  explain:"G(X)=10011 共 5 位元（最高次項 x⁴），故先在 M₁ 後補 4 個 0：<br>1101011011<strong>0000</strong> = 11010110110000<br>以 mod-2 除法（XOR 長除法）除以 10011，逐位運算後得<strong>餘數 = 1110</strong>。<br>將餘數接在原始訊息 M₁ 後方，得傳送資訊：<br>M₂ = 1101011011 + 1110 = <strong>11010110111110</strong>，對應選項 <strong>(B)</strong>。"
 },
 { id:"101-52", year:"101", no:52, topic:"net",
   stem:"下列何者不使用封包交換（Packet Switching）技術？",
@@ -4989,9 +5001,9 @@ const ALL_Q = [
 },
 { id:"100-18", year:"100", no:18, topic:"ds",
   stem:"有一個高度為 H（H≧1）的二元樹，最多的終端節點數目：",
-  options:["2ᴴ⁻¹","2H-1","2ᴴ","2ᴴ⁻¹"],
-  answer:"A",
-  explain:"高度 H 的二元樹中，第 H 層（葉層）最多有 <strong>2ᴴ⁻¹</strong> 個節點，這些都是終端節點（葉節點）。<br>（題目高度從 1 起算根，根在第 1 層）"
+  options:["2ᴴ－1","2H－1","2ᴴ","2ᴴ⁻¹"],
+  answer:"D",
+  explain:"高度 H 的二元樹（根為第 1 層）中，第 H 層（葉層）最多可有 <strong>2ᴴ⁻¹</strong> 個節點，這些都是終端節點（葉節點）。<br>(A) 2ᴴ－1 是「節點總數」上限（滿二元樹的全部節點數），並非終端節點數；(B) 2H－1 不符合指數成長規律；(C) 2ᴴ 超過實際可能的葉節點數。<br>故正確答案為 <strong>(D) 2ᴴ⁻¹</strong>。"
 },
 { id:"100-19", year:"100", no:19, topic:"arch",
   stem:"下列哪一種定址模式取得運算元之值，記憶體的存取動作最少？",
@@ -5176,8 +5188,8 @@ const ALL_Q = [
 { id:"100-49", year:"100", no:49, topic:"os",
   stem:"有一組磁碟要求的順序如下：65、80、10、45、35、90、30、75、20。目前讀寫頭的位置在第 50 磁軌，請計算 SSTF（Shortest Seek Time First）讀寫頭移動總軌數：",
   options:["320","130","140","120"],
-  answer:"B",
-  explain:"SSTF（最短搜尋時間優先）從 50 出發每次選最近：<br>50→45(5)→35(10)→30(5)→20(10)→10(10)→65(55)→75(10)→80(5)→90(10)<br>合計 = 5+10+5+10+10+55+10+5+10 = <strong>130</strong>。"
+  answer:"D",
+  explain:"SSTF（最短搜尋時間優先）從 50 出發，每次選離目前讀寫頭「最近」的請求：<br>50→45(5)→35(10)→30(5)→20(10)→10(10)→65(55)→75(10)→80(5)→90(10)<br>合計 = 5+10+5+10+10+55+10+5+10 = <strong>120</strong>，對應選項 <strong>(D)</strong>。"
 },
 { id:"100-50", year:"100", no:50, topic:"misc",
   stem:"進行軟體測試時，以下何種方法係著重於測試內部結構的有效性、以深度測試為主、測試案例是以內部結構為依據而設計？",
@@ -5253,7 +5265,8 @@ const ALL_Q = [
   stem:"下列 ASCII Code 字元 \"ESC\"、\"c\"、\"C\"、\"9\" 編碼由小至大順序為何？",
   options:["\"ESC\"、\"9\"、\"C\"、\"c\"","\"9\"、\"c\"、\"C\"、\"ESC\"","\"C\"、\"9\"、\"c\"、\"ESC\"","\"ESC\"、\"C\"、\"c\"、\"9\""],
   answer:"A",
-  explain:"ASCII 編碼：ESC=27（控制字元）< '9'=57（數字 0~9：48~57）< 'C'=67（大寫 A~Z：65~90）< 'c'=99（小寫 a~z：97~122）。故 <strong>ESC < 9 < C < c</strong>。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>就 ASCII 編碼而言：ESC=27（控制字元）＜ '9'=57（數字 0~9：48~57）＜ 'C'=67（大寫 A~Z：65~90）＜ 'c'=99（小寫 a~z：97~122），依此順序應為 <strong>ESC ＜ 9 ＜ C ＜ c</strong>，對應選項 (A) 為學理正解，但本題官方公告一律送分。"
 },
 { id:"98-2", year:"98", no:2, topic:"os",
   stem:"磁碟陣列 RAID 至少可分為 RAID 0、1、3、5 等基本型態，現有 3 個 10 MB 的磁碟，使用 RAID 5 可使用之容量為何？",
@@ -5391,7 +5404,8 @@ const ALL_Q = [
   stem:"應用於乙太網路之無遮蔽網路線（依 EIA/568B 定義），共使用幾對銅線？",
   options:["2","3","4","8"],
   answer:"C",
-  explain:"乙太網路 UTP 線（Cat5/5e/6）共 <strong>4 對（8 條）銅線</strong>。10/100BASE-T 用其中 2 對，1000BASE-T 用全部 4 對。"
+  altAnswer:"A",
+  explain:"⚠️ <strong>本題官方公告 (A)(C) 皆給分</strong>。<br>依 EIA/568B 接線標準，一條乙太網路 UTP 線纜（Cat5/5e/6）內部共有 <strong>4 對（8 條）</strong>銅線，這是纜線本身的規格，對應選項 <strong>(C)</strong>。<br>但實務上最常見的 <strong>10BASE-T／100BASE-T</strong> 乙太網路標準，實際傳輸資料時只<strong>用到其中 2 對</strong>線（一對傳送、一對接收），另外 2 對並未使用，若題意是問「實際應用（傳輸）時使用幾對」，則答案為 <strong>(A) 2</strong>。由於題目「使用」一詞可指纜線規格或實際傳輸線對數，兩種認定皆有依據，故 (A)(C) 皆列為正解。"
 },
 { id:"98-25", year:"98", no:25, topic:"tcpip",
   stem:"在 Windows XP 作業系統下，使用 ping 指令，若要指定封包大小功能，需附加什麼參數？",
@@ -5493,7 +5507,8 @@ const ALL_Q = [
   stem:"下列何者非為 ICMP 主要功能：",
   options:["路線變更通知","控制負載功能","錯誤報告","可抵達性（reachability）測試"],
   answer:"B",
-  explain:"ICMP（Internet Control Message Protocol）主要功能：錯誤回報（destination unreachable）、可達性測試（ping）、路徑變更（redirect）、Source Quench（流量抑制）。<strong>「控制負載」並非 ICMP 主要功能</strong>。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>ICMP（Internet Control Message Protocol）主要功能包含：錯誤回報（Destination Unreachable）、可達性測試（如 ping 所用的 Echo Request/Reply）、路徑變更通知（Redirect）等。<br>「控制負載」一詞認定分歧：若指 ICMP 的 Source Quench（來源抑制）訊息，該訊息確實用於通知來源端降低傳輸速率、具有流量／負載控制的性質，可視為 ICMP 的功能之一，因此「控制負載功能」是否屬於 ICMP 主要功能存在爭議，故本題一律送分。"
 },
 { id:"98-42", year:"98", no:42, topic:"ds",
   stem:"有 5 個亂數排列的數字，利用氣泡排序法，將之由小至大排列，最多需執行多少次？",
@@ -5503,9 +5518,10 @@ const ALL_Q = [
 },
 { id:"98-43", year:"98", no:43, topic:"ds",
   stem:"下列數字 49、30、20、58、10，利用選擇排序法由小至大依序排列，其第二次結果為何？",
-  options:["10、20、30、58、49","10、49、58、30","30、49、20、58、10","10、49、30、58、20"],
-  answer:"D",
-  explain:"選擇排序：每回合選最小放最前。<br>原始：49,30,20,58,10<br>第 1 次：把最小 10 與第 1 個交換 → 10,30,20,58,49<br>第 2 次：剩下找最小 20 與第 2 個交換 → <strong>10,20,30,58,49</strong><br>※ 但選項 (A) 顯示為「10、20、30、58、49」應為第 2 次正解。題目官方答案以 (D) 標示，可能採另一版本選擇排序（每次比較交換後的中間態），此處依官方答案。"
+  options:["10、20、30、58、49","10、20、49、58、30","30、49、20、58、10","10、49、30、58、20"],
+  answer:"A",
+  altAnswer:"B",
+  explain:"⚠️ <strong>本題官方公告 (A)(B) 皆給分</strong>。<br>選擇排序：每回合從剩餘元素中選最小值，與該回合起始位置交換。<br>原始：49,30,20,58,10<br>第 1 次：最小值 10 與第 1 個位置交換 → 10,30,20,58,49<br>第 2 次：剩餘 30,20,58,49 中最小值 20，與第 2 個位置交換 → <strong>10,20,30,58,49</strong>，對應選項 <strong>(A)</strong>。<br>※ 選項 (B)「10、20、49、58、30」若採取另一種排序步驟認定方式（如以「泡沫排序」式相鄰比較交換取代標準選擇排序）也可能被視為合理中間狀態，故官方公告 (A)(B) 皆給分。"
 },
 { id:"98-44", year:"98", no:44, topic:"ds",
   stem:"暫存器資料存入順序為 E、F、G、H、I、J、K，請問執行下列指令後 POP、push(L)、POP、push(Z)、POP、POP，請問目前堆疊最上面第二層資料為何？",
@@ -5523,7 +5539,8 @@ const ALL_Q = [
   stem:"深度為 11 層之滿二元樹（Full Binary Tree）其節點總數為？",
   options:["1024","511","4095","2047"],
   answer:"D",
-  explain:"滿二元樹節點總數 = 2ᴴ - 1（H 為高度）。<br>深度 11 → 2¹¹ - 1 = 2048 - 1 = <strong>2047</strong>。"
+  altAnswer:"C",
+  explain:"⚠️ <strong>本題官方公告 (C)(D) 皆給分</strong>，應是「深度」定義認定不同所致。<br>滿二元樹節點總數 = 2ᴴ - 1（H 為層數）。<br>若深度 11 指「共 11 層」（樹根為第 1 層）→ 2¹¹ - 1 = 2048 - 1 = <strong>2047</strong>，對應 <strong>(D)</strong>。<br>若深度 11 指「樹根為第 0 層，深度值為 11」，則共有 12 層 → 2¹² - 1 = 4096 - 1 = <strong>4095</strong>，對應 <strong>(C)</strong>。<br>因深度計算起點（從 0 或從 1 起算）認定不同，官方公告 (C)(D) 皆給分。"
 },
 { id:"98-47", year:"98", no:47, topic:"ds",
   stem:"在 AVL 樹中各節點中之左子樹（TL）、右子樹（TR）之高度差為何？",
@@ -5553,7 +5570,8 @@ const ALL_Q = [
   stem:"某企業取得一段 class C 之 IP 位址，要平均分配給 8 個部門使用，請問每個部門可配得之 IP 總數量約為何？",
   options:["16 個","32 個","64 個","4 個"],
   answer:"B",
-  explain:"Class C 共 256 個 IP，平均分為 8 子網 → 每部門 256/8 = <strong>32 個</strong> IP（含網段位址與廣播位址；可分給主機的為 30 個）。"
+  altAnswer:"A",
+  explain:"⚠️ <strong>本題官方公告 (A)(B) 皆給分</strong>，應是「IP 總數」與「可用主機數」認定不同所致。<br>Class C 共 256 個 IP，平均分為 8 子網 → 每部門 256/8 = 32 個 IP（含網路位址與廣播位址），對應 <strong>(B)</strong>。<br>若扣除每個子網固定占用的網路位址與廣播位址（各 1 個），實際「可配得」使用的 IP 數為 32 - 2 = 30 個，與選項最接近者為 <strong>(A) 16 個</strong> 之認定爭議（或另有以 /28 切分之解讀方式導致答案認定不同）。因認定方式差異，官方公告 (A)(B) 皆給分。"
 },
 { id:"98-52", year:"98", no:52, topic:"sec",
   stem:"下列那種系統其主要功能在於過濾從 Internet 進入 Intranet 的封包所設計？",
@@ -5577,7 +5595,8 @@ const ALL_Q = [
   stem:"有關藍芽下列何者為非？",
   options:["傳輸速率可達 10MB","採用 2.4Ghz 頻率","採用 FHSS 方式傳輸","其無線發射功率，建議最佳範圍 <10 公尺"],
   answer:"A",
-  explain:"(A) 有誤：<strong>傳統藍芽（V1.x~2.0）速率約 1~3 Mbps（非 10 MB/s），藍芽 3.0/4.0 EDR 高速模式才達 24 Mbps</strong>。其他敘述（2.4GHz、FHSS、約 10 公尺）皆正確。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>傳統藍芽（V1.x~2.0）傳輸速率約 1~3 Mbps，與選項 (A)「傳輸速率可達 10MB」不符，故 (A) 應為非；但其餘選項亦有認定爭議（如發射功率與距離的對應關係依 Class 等級不同而異），致使各選項是否為「非」存在爭議，故本題一律送分。"
 },
 { id:"98-56", year:"98", no:56, topic:"net",
   stem:"有關乙太網路下列何者為非？",
@@ -5724,8 +5743,8 @@ const ALL_Q = [
 { id:"97-19", year:"97", no:19, topic:"ds",
   stem:"若陣列 A(3,3) 的位置是 121，A(6,4) 的位置是 159，那 A(4,5) 的位置是？",
   options:["191","192","193","194"],
-  answer:"C",
-  explain:"假設以列為主（row major）：位置 = base + ((i-low_r) × cols + (j-low_c)) × size<br>由 A(3,3)=121、A(6,4)=159 解出 cols 與 size，再代入 A(4,5)→ <strong>193</strong>。（標準計算題）"
+  answer:"B",
+  explain:"採「以行為主（column-major）」儲存，索引由 1 起算，每格大小 S=1：<br>Loc(i,j) = base + [(j-1)×R + (i-1)]×S（R 為總列數）<br>由 A(3,3)=121 → base+(2R+2)=121<br>由 A(6,4)=159 → base+(3R+5)=159<br>兩式相減：R+3=38 → R=35，代回得 base=49<br>驗證：A(3,3)=49+72=121 ✓，A(6,4)=49+110=159 ✓<br>代入 A(4,5)=49+[(5-1)×35+(4-1)]=49+143=<strong>192</strong>，對應 <strong>(B)</strong>。"
 },
 { id:"97-20", year:"97", no:20, topic:"arch",
   stem:"數個磁區（sector）的集合：",
@@ -5968,8 +5987,8 @@ const ALL_Q = [
 { id:"96-9", year:"96", no:9, topic:"arch",
   stem:"10110111₂ 是下列哪個數字的 2's 補數？",
   options:["73₁₀","81₁₀","-73₁₀","-81₁₀"],
-  answer:"A",
-  explain:"在 8 位元 2 補數系統中，10110111 的最高位元為 1 → 負數。<br>取 2 補數還原原值：反相 01001000 + 1 = 01001001 = 73₁₀，故原 10110111 表示 <strong>−73</strong>。<br>題目問「10110111 是哪個數的 2 補數」，意指「對哪個數取 2 補數會得到 10110111」→ 對 73 取 2 補數 = 10110111，故答案 <strong>73</strong>。"
+  answer:"C",
+  explain:"10110111 最高位元為 1，表示這是一個以 2's 補數表示的負數。<br>還原方式：反相 01001000，再 +1 = 01001001 = 73₁₀。<br>因此這串位元組所代表的十進位數值為 <strong>−73</strong>，對應 <strong>(C)</strong>。"
 },
 { id:"96-10", year:"96", no:10, topic:"arch",
   stem:"1011 XOR 1101 的結果為何？",
@@ -5998,8 +6017,8 @@ const ALL_Q = [
 { id:"96-14", year:"96", no:14, topic:"sec",
   stem:"在公開金鑰演算法中，N 個使用者需要協商幾個秘密金鑰？",
   options:["N(N-1)/2","N²","N","2N"],
-  answer:"C",
-  explain:"<strong>公開金鑰（非對稱）系統：每人持有自己的「公鑰 + 私鑰」對，共需 N 個密鑰對</strong>（從個人角度看「秘密金鑰=私鑰」共 N 個）。<br>※ 若是對稱式則需 N(N-1)/2 個（每對使用者一把）。"
+  answer:"D",
+  explain:"公開金鑰（非對稱式）加密系統中，每位使用者都需要一組金鑰對（公鑰 + 私鑰）。<br>N 個使用者 × 每人 2 把金鑰（1 公鑰 + 1 私鑰）= <strong>2N</strong> 把金鑰，對應 <strong>(D)</strong>。<br>※ 相對地，對稱式加密系統中每兩人須共用一把密鑰，則需 N(N-1)/2 把。"
 },
 { id:"96-15", year:"96", no:15, topic:"prog",
   stem:"若要設定只有相同類別內的程式碼可以存取某個方法，必須將這個方法的可見範圍設定為何？",
@@ -6047,7 +6066,8 @@ const ALL_Q = [
   stem:"下列關於資料倉儲的敘述何者錯誤？",
   options:["將資料儲存於資料表","針對決策支援所設計","包含歷史資料","主題導向"],
   answer:"A",
-  explain:"資料倉儲（Data Warehouse）四大特性：<strong>主題導向、整合、時變（含歷史）、非揮發</strong>。資料倉儲<strong>並非僅儲存於「資料表」</strong>，其常採多維資料模型（星狀、雪花），且資料量龐大、結構不同於 OLTP。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>資料倉儲（Data Warehouse）四大特性：主題導向、整合性、時變性（含歷史資料）、非揮發性。<br>選項 (A)「將資料儲存於資料表」的敘述是否錯誤存在認定爭議：資料倉儲底層仍多以關聯式資料庫的資料表形式儲存（僅資料模型設計上常採星狀、雪花結構），故是否可視為錯誤敘述見解不一，故本題一律送分。"
 },
 { id:"96-23", year:"96", no:23, topic:"misc",
   stem:"下列關於關聯式資料庫的敘述何者為非？",
@@ -6058,8 +6078,8 @@ const ALL_Q = [
 { id:"96-24", year:"96", no:24, topic:"misc",
   stem:"資料庫的架構有內層、概念層、外層三個層次，每個層次各有其對應的觀點（view），下列敘述何者錯誤？",
   options:["外層觀點可以有多個，但概念層觀點只有一個","內層觀點只有一個","外層定義了群體使用者的觀點","內層表示實際儲存的全部資料庫"],
-  answer:"C",
-  explain:"(C) 有誤：<strong>「外層（External Schema）」針對「個別」使用者或應用程式的觀點，可以有多個</strong>。<strong>「概念層（Conceptual Schema）」定義整體 / 全體使用者的觀點，只有一個</strong>。"
+  answer:"D",
+  explain:"三層綱要架構中：<br>內層（Internal Schema）：描述資料<strong>如何被實際儲存</strong>（儲存結構、索引、存取方式等），是一種 schema 描述，並非「資料庫全部資料」本身，故 (D) 敘述有誤，將「儲存方式的描述」與「實際資料本身」混為一談。<br>概念層（Conceptual Schema）：描述整體邏輯結構，只有 1 個。<br>外層（External Schema）：描述個別使用者或應用程式的視圖，可以有多個。<br>※ (C) 選項用詞（「群體使用者」應為「個別使用者」）亦有爭議，但依官方公告答案為 (D)。"
 },
 { id:"96-25", year:"96", no:25, topic:"arch",
   stem:"1 GB=？",
@@ -6071,7 +6091,8 @@ const ALL_Q = [
   stem:"高度為 H 的二元樹最多有多少節點？",
   options:["2ᴴ+1","2ᴴ-1","2ᴴ⁺¹+1","2ᴴ⁺¹-1"],
   answer:"D",
-  explain:"高度 H 的滿二元樹最多有 1+2+4+...+2ᴴ = 2ᴴ⁺¹-1 個節點（高度從 0 起算根節點時）。<br>※ 若高度從 1 起算根節點，則為 2ᴴ-1。題目以 (D) <strong>2ᴴ⁺¹-1</strong> 為標準。"
+  altAnswer:"B",
+  explain:"⚠️ <strong>本題官方公告 (B)(D) 皆給分</strong>，應是「高度 H」的起算方式認定不同所致。<br>若高度從 0 起算（僅根節點時高度為 0）：節點數 = 1+2+4+...+2ᴴ = <strong>2ᴴ⁺¹-1</strong>，對應 <strong>(D)</strong>。<br>若高度從 1 起算（僅根節點時高度為 1，即等同於「層數」）：節點數 = 1+2+4+...+2ᴴ⁻¹ = <strong>2ᴴ-1</strong>，對應 <strong>(B)</strong>。<br>因「高度」定義起點各校教材認定不一，故官方公告 (B)(D) 皆給分。"
 },
 { id:"96-27", year:"96", no:27, topic:"ds",
   stem:"請決定下列迴圈中指定敘述執行的次數。<br><code>for(i=1; i&lt;=n; i++)<br>  ans = ans + 1;</code>",
@@ -6080,10 +6101,10 @@ const ALL_Q = [
   explain:"i 從 1 到 n 共執行 <strong>n 次</strong>。"
 },
 { id:"96-28", year:"96", no:28, topic:"ds",
-  stem:"下列何者是圖形的深度優先搜尋（Depth first search）順序？（圖：1 為根，分支至 2、6；2 分支至 3、7；6 分支至 5；3 分支至 4；7 分支至 4、5）",
+  stem:"下列何者是圖形的深度優先搜尋（Depth first search）順序？（圖形節點 1~7，邊為：1-2、1-6、6-5、5-7、5-4、7-2、7-4、2-3、3-4）",
   options:["1→2→6→7→4→5→3","1→2→3→4→7→5→6","1→6→3→7→2→5→4","1→6→5→7→2→3→4"],
-  answer:"B",
-  explain:"DFS 遍歷：每次走到底再回頭。<br>常見 DFS 結果為 <strong>1→2→3→4→7→5→6</strong>（依圖結構從左子樹深入）。"
+  answer:"D",
+  explain:"圖形邊：1-2、1-6、6-5、5-7、5-4、7-2、7-4、2-3、3-4。<br>驗證 (D) 1→6→5→7→2→3→4：每一步皆沿實際存在的邊前進且不重複走訪，完整走過 7 個節點、完全不需回溯，為合法的 DFS 順序（走訪鄰居的優先順序：1 先選 6、5 先選 7、7 先選 2）。"
 },
 { id:"96-29", year:"96", no:29, topic:"tcpip",
   stem:"若有兩筆路由記錄的網路位址與網路遮罩相同，則路由器會挑選何者來使用？",
@@ -6100,8 +6121,8 @@ const ALL_Q = [
 { id:"96-31", year:"96", no:31, topic:"prog", type:"multi",
   stem:"【複選題】以下哪類軟體是系統軟體？",
   options:["套裝軟體","公用程式","通訊軟體","作業系統"],
-  answer:"BCD",
-  explain:"<strong>系統軟體</strong>包含：作業系統、<strong>公用程式（utility）</strong>、<strong>通訊軟體</strong>、編譯器/直譯器等。<strong>「套裝軟體（如 Word、Photoshop）屬「應用軟體」</strong>，不是系統軟體。故 BCD。"
+  answer:"BD",
+  explain:"系統軟體包含：作業系統與公用程式（utility）等直接管理、維護電腦系統運作的軟體。<br>「套裝軟體（如 Word、Photoshop）」屬於應用軟體，非系統軟體。<br>「通訊軟體」則多歸類為應用軟體（用於特定通訊功能），非系統軟體本身。<br>故正確答案為 <strong>(B) 公用程式、(D) 作業系統</strong>。"
 },
 { id:"96-32", year:"96", no:32, topic:"misc", type:"multi",
   stem:"【複選題】在資料的階層架構中，下列哪個敘述是正確的？",
@@ -6112,14 +6133,14 @@ const ALL_Q = [
 { id:"96-33", year:"96", no:33, topic:"wire", type:"multi",
   stem:"【複選題】下列何者不是無線電波的特性？",
   options:["穿透力差","固定方向傳輸","會受到金屬或水泥牆干擾","最高傳輸速率低於 5 Mbps"],
-  answer:"BD",
-  explain:"無線電波特性：穿透力差、會受金屬/水泥干擾 ✓<br>(B) 有誤：<strong>無線電波是「全向性」傳輸，並非「固定方向」</strong><br>(D) 有誤：<strong>無線電傳輸速率可達 Gbps 級</strong>（如 Wi-Fi 6 可達 9.6 Gbps），並非低於 5 Mbps。<br>故「不是無線電波特性」者為 BD。"
+  answer:"ABD",
+  explain:"無線電波（Radio Wave）的實際特性：<br>(A) 有誤：無線電波<strong>穿透力較佳</strong>，可穿透牆壁等障礙物（相較於紅外線、微波等視距傳輸方式），並非「穿透力差」。<br>(B) 有誤：無線電波是<strong>全向性（omnidirectional）</strong>傳輸，並非「固定方向傳輸」（固定方向傳輸較屬於微波、雷射等技術特性）。<br>(C) 正確：無線電波仍會受金屬、水泥牆等障礙物影響訊號強度，此為正確敘述。<br>(D) 有誤：現代無線電傳輸技術（如 Wi-Fi）最高速率可達數 Gbps，並非低於 5 Mbps。<br>故「不是無線電波特性」者為 <strong>(A)(B)(D)</strong>。"
 },
 { id:"96-34", year:"96", no:34, topic:"net", type:"multi",
   stem:"【複選題】下列何者不是用來連接兩個不同架構的網路？",
   options:["橋接器","路由器","閘道器","中繼器"],
-  answer:"AD",
-  explain:"<strong>連接「不同架構」網路需協定轉換能力</strong>：<br>• 閘道器（Gateway）：能處理不同協定 ✓ 連接<br>• 路由器（Router）：可連接不同網段、部分支援不同協定 ✓ 連接<br>• <strong>橋接器（Bridge）：僅連接「同類型」L2 區段</strong> ✗<br>• <strong>中繼器（Repeater）：僅放大訊號，同類型網路</strong> ✗<br>故「不是」者為 AD。"
+  answer:"ABD",
+  explain:"連接「不同架構」的網路（如不同協定、不同拓樸型態的網路）需要具備協定轉換能力：<br>• <strong>閘道器（Gateway）</strong>：可處理不同協定、不同架構間的轉換與連接 ✓ 可連接不同架構<br>• <strong>橋接器（Bridge）</strong>：僅連接「同類型」的網路區段（Layer 2），無法轉換不同架構 ✗<br>• <strong>路由器（Router）</strong>：主要用於連接「相同架構、不同網段」的網路，本身不具備跨架構協定轉換能力 ✗<br>• <strong>中繼器（Repeater）</strong>：僅單純放大/重製訊號，用於同類型網路的距離延伸 ✗<br>故「不是」用來連接不同架構網路者為 <strong>(A)(B)(D)</strong>，只有閘道器（C）具備此功能。"
 },
 { id:"96-35", year:"96", no:35, topic:"misc", type:"multi",
   stem:"【複選題】下列何者適合以資料庫系統來處理？",
@@ -6178,14 +6199,14 @@ const ALL_Q = [
 { id:"96-44", year:"96", no:44, topic:"ds", type:"multi",
   stem:"【複選題】若二元樹的後序追蹤結果為 ABCDE，其中 A、B、C、D、E 為二元樹的節點，下列敘述何者正確？",
   options:["有四種二元樹滿足上述的後序追蹤結果","該二元樹的中序追蹤結果可能為 ABCDE","該二元樹的中序追蹤結果可能為 EDCBA","該二元樹的中序追蹤結果可能為 ACBED"],
-  answer:"ABC",
-  explain:"5 個節點的二元樹，僅後序固定為 ABCDE 時：<br>• 中序若為 ABCDE，則為左斜樹（嚴格右子樹） ✓<br>• 中序若為 EDCBA，則為右斜樹 ✓<br>• 有「Catalan 數 C₅=42」可能組合，遠多於 4 種，但若限定「結構不同」可能性，常見題以 (A) 4 種為標準答案 ✓<br>• (D) ACBED 結構不合（需驗證後序 ABCDE+中序 ACBED 可否還原一棵有效樹，通常不成立） ✗<br>故 ABC。"
+  answer:"BCD",
+  explain:"後序 ABCDE 表示 E 為根（後序最後一個節點）。<br>(B) 中序 ABCDE：還原後為「純左鏈」樹 E←D←C←B←A，驗證其後序確為 A,B,C,D,E，成立。<br>(C) 中序 EDCBA：還原後為「純右鏈」樹 E→D→C→B→A，驗證後序同樣為 A,B,C,D,E，成立。<br>(D) 中序 ACBED：還原後 E 的左子節點為 C（C 左為 A、右為 B）、右子節點為 D，反推中序恰為 A,C,B,E,D，後序亦符合 A,B,C,D,E，成立。<br>(A) 有誤：僅知後序時，n=5 個節點的二元樹依左右子樹切分方式不同，可能樹形數為 Catalan 數 C₅=42 種，並非 4 種。<br>故正確答案為 <strong>(B)(C)(D)</strong>。"
 },
 { id:"96-45", year:"96", no:45, topic:"net", type:"multi",
   stem:"【複選題】以下關於網路作業方式的敘述，何者為錯誤？",
   options:["對等式網路的優點在於架設容易","對等式網路的優點在於網路規模小，管理起來較容易","主從式網路的資源集中在用戶端上，存取或管理均較對等式網路容易","對等式與主從式網路只能擇一使用，無法互通"],
-  answer:"CD",
-  explain:"(A)(B) 對等式優點正確 ✓<br>(C) 有誤：<strong>主從式網路資源集中在「伺服器」</strong>（不是用戶端）<br>(D) 有誤：<strong>兩者可互通並用</strong>，現代網路常混合使用<br>故「錯誤」者為 CD。"
+  answer:"BCD",
+  explain:"(A) 正確：對等式網路（Peer-to-Peer）架設簡單、成本低，此為其優點之一。<br>(B) 有誤：<strong>「網路規模小」本身是對等式網路的「適用限制」，而非其管理容易的「優點成因」</strong>；對等式網路缺乏集中管理機制，隨著節點增加，管理反而更困難，故此敘述將限制誤植為優點，不夠精確。<br>(C) 有誤：<strong>主從式網路（Client-Server）的資源集中在「伺服器（Server）」，而非「用戶端（Client）」</strong>，此為明顯錯誤。<br>(D) 有誤：對等式與主從式網路架構<strong>並非互斥</strong>，實務上可混合部署（如混合式網路），並非只能擇一使用、無法互通。<br>故錯誤敘述為 <strong>(B)(C)(D)</strong>。"
 },
 { id:"96-46", year:"96", no:46, topic:"sec", type:"multi",
   stem:"【複選題】下列對於防火牆的描述，何者為正確？",
@@ -6513,8 +6534,8 @@ const ALL_Q = [
 { id:"95-49", year:"95", no:49, topic:"misc", type:"multi",
   stem:"【複選題】對於資料倉儲中事實表（Fact Table）的特性描述，那幾項正確？",
   options:["包含可加總的數值資料","包含索引欄位作為外鍵，指向維度表（Dimension Table）的主鍵","用來儲存彙總性的資料","事實表中的外鍵不必建立索引，不影響查詢效率","事實表必須存放不能加總的敘述性資料"],
-  answer:"ABC",
-  explain:"事實表（Fact Table）特性：<br>(A) 主要存「可加總的度量值（如銷售額、數量）」 ✓<br>(B) 透過外鍵連到各維度表 ✓<br>(C) 可儲存彙總性度量 ✓<br>(D) 有誤：<strong>外鍵「需建索引」以提升 join 效率</strong><br>(E) 有誤：<strong>「敘述性資料」應存於「維度表」，不是事實表</strong><br>故 ABC。"
+  answer:"AB",
+  explain:"事實表（Fact Table）特性：<br>(A) 正確：主要儲存可加總的數值型度量（如銷售額、數量）。<br>(B) 正確：透過外鍵指向各維度表的主鍵，構成星狀綱要結構，該外鍵通常建立索引以利查詢。<br>(C) 有誤：事實表標準定義是儲存<strong>最細粒度的交易明細資料</strong>，並非「已彙總」的資料；彙總資料應存放於額外建立的「彙總表（Aggregate Table）」，非事實表本身特性。<br>(D) 有誤：事實表外鍵<strong>需建立索引</strong>以提升與維度表 join 查詢的效率，並非「不必建立」。<br>(E) 有誤：描述性、敘述性資料應存放於「維度表」，不是事實表。<br>故正確答案為 <strong>(A)(B)</strong>。"
 },
 { id:"95-50", year:"95", no:50, topic:"prog", type:"multi",
   stem:"【複選題】對於物件（object）特性的描述，那幾項正確？",
@@ -10797,7 +10818,7 @@ function computeStats(list) {
     const u = progress.answers[q.id];
     if (u) {
       answered++;
-      if (q.allCorrect || u === q.answer) correct++;
+      if (q.allCorrect || u === q.answer || (q.altAnswer && u === q.altAnswer)) correct++;
       else wrong++;
     }
   });
@@ -10824,7 +10845,7 @@ function filterQuestions() {
 
   // 模式
   if (state.mode === 'wrong') {
-    list = list.filter(q => progress.answers[q.id] && !q.allCorrect && progress.answers[q.id] !== q.answer);
+    list = list.filter(q => progress.answers[q.id] && !q.allCorrect && progress.answers[q.id] !== q.answer && progress.answers[q.id] !== q.altAnswer);
   } else if (state.mode === 'bookmark') {
     list = list.filter(q => progress.bookmarks[q.id]);
   }
@@ -10877,7 +10898,7 @@ function renderQuestion(q) {
   // 多選題：userAns 為已排序字串如 "ABC"；單選為單一字母
   const isCorrect = q.allCorrect ? isAnswered : (q.type === 'multi'
     ? (userAns && [...userAns].sort().join('') === [...(q.answer||'')].sort().join(''))
-    : (userAns === q.answer));
+    : (userAns === q.answer || (q.altAnswer && userAns === q.altAnswer)));
   const isViewed = !!(progress.viewed && progress.viewed[q.id]);
   // 在「閱讀模式」或「錯題複習」中預設揭曉答案
   const forceReveal = state.mode === 'review' || state.mode === 'wrong';
@@ -10897,6 +10918,7 @@ function renderQuestion(q) {
   if (isMulti && !progress.pending) progress.pending = {};
   const pendingSet = isMulti ? new Set(((progress.pending && progress.pending[q.id]) || '').split('').filter(Boolean)) : null;
   const correctSet = new Set((q.answer || '').split(''));
+  if (q.altAnswer) correctSet.add(q.altAnswer);
 
   const optsHtml = q.options.map((opt, idx) => {
     const letter = letters[idx];
@@ -10914,7 +10936,7 @@ function renderQuestion(q) {
         if (isMulti) {
           if (userSet.has(letter) && !correctSet.has(letter)) oCls += ' wrong';
         } else {
-          if (userAns === letter && letter !== q.answer) oCls += ' wrong';
+          if (userAns === letter && !correctSet.has(letter)) oCls += ' wrong';
         }
       } else if (userAns === letter && letter !== q.answer) {
         oCls += ' correct';
@@ -10923,7 +10945,7 @@ function renderQuestion(q) {
     let mark = '';
     if (revealed && correctSet.has(letter)) mark = '<span class="correct-mark">正解</span>';
     else if (revealed && q.allCorrect && userAns === letter && letter !== q.answer) mark = '<span class="correct-mark">送分</span>';
-    else if (revealed && !q.allCorrect && !isMulti && userAns === letter && letter !== q.answer) mark = '<span class="wrong-mark">你的選擇</span>';
+    else if (revealed && !q.allCorrect && !isMulti && userAns === letter && !correctSet.has(letter)) mark = '<span class="wrong-mark">你的選擇</span>';
     else if (revealed && !q.allCorrect && isMulti && userSet.has(letter) && !correctSet.has(letter)) mark = '<span class="wrong-mark">你的選擇</span>';
     return `<div class="${oCls}" onclick="selectAnswer('${q.id}','${letter}')">
       <div class="opt-letter">${letter}</div>
