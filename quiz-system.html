@@ -976,7 +976,8 @@ const ALL_Q = [
   stem:"執行下列 C 語言程式，輸出的值為何？<br><code>int i = 0, n = 1, sum = 1;<br>for(n = 2; n <= 7; n++) {<br>  i = n / 2;<br>  sum *= i;<br>}<br>printf(\"%d\\n\", sum);</code>",
   options:["12","36","72","5040"],
   answer:"B",
-  explain:"※ 原題 sum 初始值為 <strong>1</strong>（非 0），逐次 <code>sum *= i</code>，其中 i = n/2（整數除法）：<br>n=2→i=1, n=3→i=1, n=4→i=2, n=5→i=2, n=6→i=3, n=7→i=3<br>sum = 1×1×1×2×2×3×3 = <strong>36</strong>。"
+  allCorrect:true,
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>原題 sum 初始值為 <strong>1</strong>（非 0），逐次 <code>sum *= i</code>，其中 i = n/2（整數除法）：<br>n=2→i=1, n=3→i=1, n=4→i=2, n=5→i=2, n=6→i=3, n=7→i=3<br>sum = 1×1×1×2×2×3×3 = <strong>36</strong>，對應選項 (B)。"
 },
 { id:"113-18", year:"113", no:18, topic:"prog",
   stem:"在 C 語言中，下列何種運算子的運算優先順位最高？",
@@ -10796,7 +10797,7 @@ function computeStats(list) {
     const u = progress.answers[q.id];
     if (u) {
       answered++;
-      if (u === q.answer) correct++;
+      if (q.allCorrect || u === q.answer) correct++;
       else wrong++;
     }
   });
@@ -10823,7 +10824,7 @@ function filterQuestions() {
 
   // 模式
   if (state.mode === 'wrong') {
-    list = list.filter(q => progress.answers[q.id] && progress.answers[q.id] !== q.answer);
+    list = list.filter(q => progress.answers[q.id] && !q.allCorrect && progress.answers[q.id] !== q.answer);
   } else if (state.mode === 'bookmark') {
     list = list.filter(q => progress.bookmarks[q.id]);
   }
@@ -10874,9 +10875,9 @@ function renderQuestion(q) {
   const isBookmarked = !!progress.bookmarks[q.id];
   const isAnswered = !!userAns;
   // 多選題：userAns 為已排序字串如 "ABC"；單選為單一字母
-  const isCorrect = q.type === 'multi'
+  const isCorrect = q.allCorrect ? isAnswered : (q.type === 'multi'
     ? (userAns && [...userAns].sort().join('') === [...(q.answer||'')].sort().join(''))
-    : (userAns === q.answer);
+    : (userAns === q.answer));
   const isViewed = !!(progress.viewed && progress.viewed[q.id]);
   // 在「閱讀模式」或「錯題複習」中預設揭曉答案
   const forceReveal = state.mode === 'review' || state.mode === 'wrong';
@@ -10909,16 +10910,21 @@ function renderQuestion(q) {
     }
     if (revealed) {
       if (correctSet.has(letter)) oCls += ' correct';
-      if (isMulti) {
-        if (userSet.has(letter) && !correctSet.has(letter)) oCls += ' wrong';
-      } else {
-        if (userAns === letter && letter !== q.answer) oCls += ' wrong';
+      if (!q.allCorrect) {
+        if (isMulti) {
+          if (userSet.has(letter) && !correctSet.has(letter)) oCls += ' wrong';
+        } else {
+          if (userAns === letter && letter !== q.answer) oCls += ' wrong';
+        }
+      } else if (userAns === letter && letter !== q.answer) {
+        oCls += ' correct';
       }
     }
     let mark = '';
     if (revealed && correctSet.has(letter)) mark = '<span class="correct-mark">正解</span>';
-    else if (revealed && !isMulti && userAns === letter && letter !== q.answer) mark = '<span class="wrong-mark">你的選擇</span>';
-    else if (revealed && isMulti && userSet.has(letter) && !correctSet.has(letter)) mark = '<span class="wrong-mark">你的選擇</span>';
+    else if (revealed && q.allCorrect && userAns === letter && letter !== q.answer) mark = '<span class="correct-mark">送分</span>';
+    else if (revealed && !q.allCorrect && !isMulti && userAns === letter && letter !== q.answer) mark = '<span class="wrong-mark">你的選擇</span>';
+    else if (revealed && !q.allCorrect && isMulti && userSet.has(letter) && !correctSet.has(letter)) mark = '<span class="wrong-mark">你的選擇</span>';
     return `<div class="${oCls}" onclick="selectAnswer('${q.id}','${letter}')">
       <div class="opt-letter">${letter}</div>
       <div class="opt-text">${renderInline(opt)}</div>
