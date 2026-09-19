@@ -973,11 +973,11 @@ const ALL_Q = [
   explain:"<strong>黑箱測試</strong>只看輸入輸出、不看內部程式邏輯，適合系統測試、整合測試、壓力測試等較高層級測試。<strong>單元測試（Unit Test）</strong>針對個別函式/模組的內部邏輯，需了解程式碼結構，屬<strong>白箱測試</strong>範疇，故不適合純黑箱方式。"
 },
 { id:"113-17", year:"113", no:17, topic:"prog",
-  stem:"執行下列 C 語言程式，輸出的值為何？<br><code>int i = 0, n = 1, sum = 1;<br>for(n = 2; n <= 7; n++) {<br>  i = n / 2;<br>  sum *= i;<br>}<br>printf(\"%d\\n\", sum);</code>",
+  stem:"執行下列 C 語言程式，輸出的值為何？<br><code>int i = 0, n = 1, sum = 0;<br>for(n = 2; n <= 7; n++) {<br>  i = n / 2;<br>  sum *= i;<br>}<br>printf(\"%d\\n\", sum);</code>",
   options:["12","36","72","5040"],
   answer:"B",
   allCorrect:true,
-  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>原題 sum 初始值為 <strong>1</strong>（非 0），逐次 <code>sum *= i</code>，其中 i = n/2（整數除法）：<br>n=2→i=1, n=3→i=1, n=4→i=2, n=5→i=2, n=6→i=3, n=7→i=3<br>sum = 1×1×1×2×2×3×3 = <strong>36</strong>，對應選項 (B)。"
+  explain:"⚠️ <strong>本題官方公告一律送分</strong>。<br>由於程式是以 <code>sum *= i</code>（乘法）累乘，只要初始值為 0，不論後續乘上任何數字，<strong>sum 永遠等於 0</strong>，跑完整個迴圈結果仍是 0——但選項中並沒有 0 這個答案，代表題目本身數值設定有誤、無正確解可選，故本題一律送分。<br>※ 若依本頁題幹所載 sum 初始值為 1 來計算，則 sum = 1×1×1×2×2×3×3 = 36，對應選項 (B)，僅供參考。"
 },
 { id:"113-18", year:"113", no:18, topic:"prog",
   stem:"在 C 語言中，下列何種運算子的運算優先順位最高？",
