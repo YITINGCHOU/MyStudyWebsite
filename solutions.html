@@ -716,7 +716,6 @@ traceroute 的核心原理是「刻意製造 TTL 過期」。
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <string.h>
 
 // 輔助函式：計算各位數字平方和
 int squareSum(int n) {
@@ -732,12 +731,12 @@ int squareSum(int n) {
 // 解法一：用標記陣列偵測循環（取代 HashSet）
 // 平方和很快收斂到 1000 以內，故陣列大小 1000 已足夠
 bool isHappy(int n) {
-    bool seen[1000];
-    memset(seen, false, sizeof(seen));   // 初始化標記陣列
+    bool seen[1000] = {false};           // 初始化標記陣列
     while (n != 1) {
         if (n < 1000 && seen[n])         // 此數出現過 → 進入循環
             return false;
-        if (n < 1000) seen[n] = true;    // 記錄出現過的數字
+        if (n < 1000) 
+            seen[n] = true;              // 記錄出現過的數字
         n = squareSum(n);                // 產生下一個數字
     }
     return true;                         // 停在 1 即為快樂數
@@ -755,9 +754,9 @@ bool isHappyFloyd(int n) {
 }
 
 int main() {
-    printf("%d\\n", isHappy(19));      // 1 (true)  19→82→68→100→1
-    printf("%d\\n", isHappy(2));       // 0 (false) 進入 4 的循環
-    printf("%d\\n", isHappyFloyd(7));  // 1 (true)
+    int n;
+    scanf("%d", &n);
+    printf("%s\n", isHappy(n) ? "true" : "false");  // 19（true）、7（true）、25（false）
     return 0;
 }`
       }
@@ -778,7 +777,7 @@ int main() {
 | 儲存內容 | 變數**直接儲存「值」本身** | 變數儲存的是**指向物件的「位址（參考）」**，物件本體在堆積（Heap） |
 | 記憶體位置 | 區域變數放在堆疊（Stack） | 參考放在 Stack，物件實體放在 Heap |
 | 預設值 | 0 / 0.0 / false / '\\u0000' | null |
-| 傳遞方式 | 傳值（pass-by-value），複製值 | 傳遞「參考的值」，複製的是位址，故可透過參考修改同一物件 |
+| 傳遞方式 | 傳值（pass-by-value）：複製「值」本身 | pass-by-value：複製「位址值」→ 可透過位址修改原物件內容，但重新賦值不影響原物件 |
 | 是否可為 null | 不可 | 可 |
 
 例：\`int a = 5;\` 變數 a 裡就是 5；\`String s = new String("hi");\` 變數 s 裡是一個位址，"hi" 物件在 Heap。
