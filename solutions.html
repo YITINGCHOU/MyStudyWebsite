@@ -917,7 +917,7 @@ CREATE TABLE Author (
     name  VARCHAR(50) NOT NULL,
     PRIMARY KEY (pNo, name),
     FOREIGN KEY (pNo) REFERENCES Product(pNo)
-);`,
+);
 
 (一) 試以 SQL 語法，列出各作者之銷售總金額。（3分）
 (二) 當某讀者把某作者的所有書都買過，稱該讀者為「鐵粉」。試以 SQL 列出達文西的所有「鐵粉」姓名。（3分）
