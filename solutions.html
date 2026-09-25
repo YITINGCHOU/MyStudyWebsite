@@ -889,36 +889,31 @@ for (Animal a : arr) a.makeSound();  // 各自呼叫對應實作
       score: 16,
       question: `某書店資料庫中有數個資料表，其 DDL 如下，請回答下列問題：（3題，共16分）
 CREATE TABLE Product (
-    pNo        CHAR(6) NOT NULL PRIMARY KEY,
-    pName      VARCHAR(30),
-    unitPrice  INT
+    pNo CHAR(6) NOT NULL PRIMARY KEY,
+    pName VARCHAR(30),
+    unitPrice INT
 );
-
 CREATE INDEX PriceIndex ON Product(unitPrice);
-
 CREATE TABLE Member (
-    mId    CHAR(8) NOT NULL PRIMARY KEY,
-    name   VARCHAR(50) NOT NULL,
-    email  VARCHAR(50) NOT NULL
+    mId CHAR(8) NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL
 );
-
 CREATE TABLE Buy (
-    mId      CHAR(8) NOT NULL,
-    pNo      CHAR(6) NOT NULL,
-    BuyTime  DATETIME NOT NULL,
-    amount   INT,
+    mId CHAR(8) NOT NULL,
+    pNo CHAR(6) NOT NULL,
+    BuyTime DATETIME NOT NULL,
+    amount INT,
     PRIMARY KEY (mId, pNo, BuyTime),
     FOREIGN KEY (mId) REFERENCES Member(mId),
     FOREIGN KEY (pNo) REFERENCES Product(pNo)
 );
-
 CREATE TABLE Author (
-    pNo   CHAR(6)     NOT NULL,
-    name  VARCHAR(50) NOT NULL,
+    pNo CHAR(6) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     PRIMARY KEY (pNo, name),
     FOREIGN KEY (pNo) REFERENCES Product(pNo)
 );
-
 (一) 試以 SQL 語法，列出各作者之銷售總金額。（3分）
 (二) 當某讀者把某作者的所有書都買過，稱該讀者為「鐵粉」。試以 SQL 列出達文西的所有「鐵粉」姓名。（3分）
 (三) Product 共 100,000 筆，每硬碟頁存 200 筆，以 pNo 及 unitPrice 為索引建立的 B+ tree 各有 4 層（含葉節點），試問下列語法平均存取幾個硬碟頁？請列示計算過程。
