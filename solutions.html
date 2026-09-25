@@ -888,11 +888,36 @@ for (Animal a : arr) a.makeSound();  // 各自呼叫對應實作
       title: "書店資料庫 SQL 查詢與 B+ tree 成本估算",
       score: 16,
       question: `某書店資料庫中有數個資料表，其 DDL 如下，請回答下列問題：（3題，共16分）
-Product(pNo CHAR(6) PK, pName VARCHAR(30), unitPrice int)
-  CREATE INDEX PriceIndex ON Product(unitPrice) CLUSTER;
-Member(mId CHAR(8) PK, name, email)
-Buy(mId, pNo, BuyTime, amount, PK(mId,pNo,BuyTime), FK mId→Member, FK pNo→Product)
-Author(pNo, name, PK(pNo,name), FK pNo→Product)
+CREATE TABLE Product (
+    pNo        CHAR(6) NOT NULL PRIMARY KEY,
+    pName      VARCHAR(30),
+    unitPrice  INT
+);
+
+CREATE INDEX PriceIndex ON Product(unitPrice);
+
+CREATE TABLE Member (
+    mId    CHAR(8) NOT NULL PRIMARY KEY,
+    name   VARCHAR(50) NOT NULL,
+    email  VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Buy (
+    mId      CHAR(8) NOT NULL,
+    pNo      CHAR(6) NOT NULL,
+    BuyTime  DATETIME NOT NULL,
+    amount   INT,
+    PRIMARY KEY (mId, pNo, BuyTime),
+    FOREIGN KEY (mId) REFERENCES Member(mId),
+    FOREIGN KEY (pNo) REFERENCES Product(pNo)
+);
+
+CREATE TABLE Author (
+    pNo   CHAR(6)     NOT NULL,
+    name  VARCHAR(50) NOT NULL,
+    PRIMARY KEY (pNo, name),
+    FOREIGN KEY (pNo) REFERENCES Product(pNo)
+);`,
 
 (一) 試以 SQL 語法，列出各作者之銷售總金額。（3分）
 (二) 當某讀者把某作者的所有書都買過，稱該讀者為「鐵粉」。試以 SQL 列出達文西的所有「鐵粉」姓名。（3分）
