@@ -1380,6 +1380,10 @@ bool isPrime(long long r) {
     if (r == 2) return true;
     if (r % 2 == 0) return false;
     long long limit = (long long) sqrt((double) r);
+    // 修正浮點誤差
+    while (limit * limit > r) limit--;
+    while ((limit + 1) * (limit + 1) <= r) limit++;
+    
     for (long long i = 3; i <= limit; i += 2) {
         if (r % i == 0) return false;
     }
