@@ -893,7 +893,7 @@ CREATE TABLE Product (
     pName VARCHAR(30),
     unitPrice INT
 );
-CREATE INDEX PriceIndex ON Product(unitPrice);
+CREATE INDEX PriceIndex ON Product(unitPrice) CLUSTER; 
 CREATE TABLE Member (
     mId CHAR(8) NOT NULL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
