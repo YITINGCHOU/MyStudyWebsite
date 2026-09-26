@@ -1384,6 +1384,7 @@ bool isPrime(long long r) {
     while (limit * limit > r) limit--;
     while ((limit + 1) * (limit + 1) <= r) limit++;
     
+    // 迴圈檢查 i = 3, 5（因為前面已經用 r % 2 == 0 排除偶數了，所以從 3 開始，每次 +2）：
     for (long long i = 3; i <= limit; i += 2) {
         if (r % i == 0) return false;
     }
@@ -1398,7 +1399,8 @@ bool hasThreeDivisors(long long a, long long b) {
 
     // 步驟1：檢查 N 是否為完全平方數
     long long r = (long long) round(sqrt((double) n));
-    // 修正浮點誤差，於 r-1, r, r+1 中尋找
+    //              ③轉整數   ②四捨五入   ①先轉成 double 再開根號
+    // 修正浮點誤差，確保：r * r <= n  且  (r+1) * (r+1) > n
     while (r * r > n) r--;
     while ((r + 1) * (r + 1) <= n) r++;
     if (r * r != n) return false;   // 不是完全平方數
